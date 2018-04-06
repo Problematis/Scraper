@@ -1,9 +1,9 @@
 import urllib.request
 from bs4 import BeautifulSoup
 
-url = "https://www.reddit.com/top"
+target = "https://www.reddit.com/top"
 # download the URL and extract the content inot the variable html
-request = urlib.request.Request(url)
+request = urlib.request.Request(target)
 html = urllib.request.urlopen(request).read()
 
 #pass the HTML to Beautifulsoup.
