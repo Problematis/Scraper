@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 target = "https://www.reddit.com/top"
 # download the URL and extract the content inot the variable html
-request = urlib.request.Request(target)
+request = urllib.request.Request(target)
 html = urllib.request.urlopen(request).read()
 
 #pass the HTML to Beautifulsoup.
