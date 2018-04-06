@@ -1,19 +1,15 @@
 import urllib.request
 from bs4 import BeautifulSoup
+import json
 
 url = "https://www.reddit.com/top/"
-#download the URL and extract the content to the variable html 
 request = urllib.request.Request(url)
 html = urllib.request.urlopen(request).read()
-
-#pass the HTML to Beautifulsoup.
-soup = BeautifulSoup(html,'html.parer')
-#get the HTML of the table called site Table where all the links are displayed
+soup = BeautifulSoup(html,'html.parser')
+#First lets get the HTML of the table called site Table where all the links are displayed
 main_table = soup.find("div",attrs={'id':'siteTable'})
 #Now we go into main_table and get every a element in it which has a class "title" 
 links = main_table.find_all("a",class_="title")
-
-#from each link extract the text of link and the link itself
 #List to store a dict of the data we extracted 
 extracted_records = []
 for link in links: 
@@ -25,9 +21,13 @@ for link in links:
         url = "https://reddit.com"+url 
     # You can join urls better using urlparse library of python. 
     # https://docs.python.org/3/library/urllib.parse.html#urllib.parse.urljoin 
+    #Lets just print it 
+    print("%s - %s"%(title,url))
     record = {
         'title':title,
         'url':url
         }
     extracted_records.append(record)
-print(extracted_records)
+#Lets write these to a JSON file for now. 
+with open('data.json', 'w') as outfile:
+    json.dump(extracted_records, outfile)
