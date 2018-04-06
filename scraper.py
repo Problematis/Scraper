@@ -1,9 +1,9 @@
 import urllib.request
 from bs4 import BeautifulSoup
 
-target = "https://www.reddit.com/top"
-# download the URL and extract the content inot the variable html
-request = urllib.request.Request(target)
+url = "https://www.reddit.com/top/"
+#download the URL and extract the content to the variable html 
+request = urllib.request.Request(url)
 html = urllib.request.urlopen(request).read()
 
 #pass the HTML to Beautifulsoup.
@@ -13,8 +13,6 @@ main_table = soup.find("div",attrs={'id':'siteTable'})
 #Now we go into main_table and get every a element in it which has a class "title" 
 links = main_table.find_all("a",class_="title")
 
-#from each link extract the text of link and the link itself
-#List to store a dict of the data we extracted 
 #from each link extract the text of link and the link itself
 #List to store a dict of the data we extracted 
 extracted_records = []
